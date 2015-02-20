@@ -15,10 +15,7 @@
 
 check_command_avail () {
     while [ $# -ne 0 ]; do
-        if ("$1" --version) > /dev/null 2>&1; then :; else
-            echo >&2 "$UTIL: missing $1, cannot proceed"
-            exit 1
-        fi
+        if ! $(which "$1" > /dev/null); then echo >&2 "$UTIL: missing $1, cannot proceed"; exit 1; fi
         shift
     done
 }
